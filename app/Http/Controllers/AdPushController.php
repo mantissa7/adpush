@@ -71,12 +71,15 @@ class AdPushController extends Controller{
         }
 
         if ($_SESSION['facebook_access_token']) {
-          return "You are logged in!";
+          $fblogin = "<p class='middle'>You are logged in!</p>";
         } else {
           $permissions = ['publish_actions', 'manage_pages', 'status_update', 'pages_manage_cta', 'read_insights'];
           $loginUrl = $helper->getLoginUrl('http://adpush.dev/feed/', $permissions);
-          return '<a href="' . $loginUrl . '">Log in with Facebook</a>';
-        } 
+
+          $fblogin = '<a class="middle" href="' . $loginUrl . '">Log in with Facebook</a>';
+        }
+
+        return view('home', ["fblogin" => $fblogin]);
     }
 
     public function getFeed(){

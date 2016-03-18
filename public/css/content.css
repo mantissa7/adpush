@@ -7,7 +7,7 @@
 }
 
 .heading{
-	background: green;
+	background: #43989C;
 
 	padding: 15px;
 	color:white;
@@ -17,6 +17,7 @@
 	border: 1px solid #999;
 	margin-bottom: 15px;
 	width: 100%;
+	background: white;
 }
 
 .box-inner{
@@ -28,6 +29,7 @@
 	border: 1px solid #6ECAD4;
 	margin-bottom: 15px;
 	border-radius: 6px;
+	background: white;
 }
 
 .alert-primary > span{
