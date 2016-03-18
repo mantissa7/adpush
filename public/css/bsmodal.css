@@ -1,0 +1,29 @@
+.bsmodal{
+	width:200px;
+	height:200px;
+	background: whitesmoke;
+	position: relative;
+	display: inline-block;
+	padding:20px;
+	border-radius: 12px;
+
+}
+
+.bsmodal-shadow{
+	position: fixed;
+	top:0;
+	right:0;
+	bottom:0;
+	left:0;
+
+	background: rgba(0,0,0,0.8);
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.modal-data{
+	display: none;
+}
+

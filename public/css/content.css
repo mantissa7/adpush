@@ -1,0 +1,44 @@
+#main{
+	margin: 15px;
+	width:80vw;
+	max-width:1200px;
+
+	margin:0 auto;
+}
+
+.heading{
+	background: green;
+
+	padding: 15px;
+	color:white;
+}
+
+.box{
+	border: 1px solid #999;
+	margin-bottom: 15px;
+	width: 100%;
+}
+
+.box-inner{
+	padding: 15px;
+}
+
+/*TODO: move to components*/
+.alert-primary{
+	border: 1px solid #6ECAD4;
+	margin-bottom: 15px;
+	border-radius: 6px;
+}
+
+.alert-primary > span{
+	background: #6ECAD4;
+	padding: 15px;
+	display: inline-block;
+	color:white;
+}
+
+.alert-primary > p{
+	display: inline-block;
+	margin: 0;
+	padding: 0 15px;
+}

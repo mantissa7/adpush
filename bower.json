@@ -1,0 +1,25 @@
+{
+  "name": "adpush",
+  "authors": [
+    "jordan <mantissa7@icloud.com>"
+  ],
+  "description": "push stock to social",
+  "main": "",
+  "moduleType": [
+    "es6"
+  ],
+  "keywords": [
+    "stock",
+    "social"
+  ],
+  "license": "MIT",
+  "homepage": "binary-symphony.com/adpush",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
