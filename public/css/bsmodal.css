@@ -1,12 +1,21 @@
 .bsmodal{
-	width:200px;
-	height:200px;
+	min-width:200px;
+	min-height:200px;
+	max-width: 60vw;
+	max-height: 80vh;
 	background: whitesmoke;
 	position: relative;
 	display: inline-block;
 	padding:20px;
 	border-radius: 12px;
 
+}
+
+.bsmodal img{
+	max-width: 100%;
+	height:auto;
+
+	max-height: 150px;
 }
 
 .bsmodal-shadow{

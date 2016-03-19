@@ -44,3 +44,13 @@
 	margin: 0;
 	padding: 0 15px;
 }
+
+.boost{
+	align-self: flex-end;
+}
+
+.boost button{
+	background: #43609C;
+	border:none;
+	color:white;
+}

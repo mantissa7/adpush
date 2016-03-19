@@ -49,6 +49,17 @@
 		  	<div class="box-inner">
 			  	<p>Looking Good!</p>
 
+			  	<?php /*
+			  		foreach($data['data'] as $metric){
+			  			if($metric['name'] == "post_reactions_like_total"){
+			  				print_r($metric);
+			  			}
+			  			echo "<br><br>";
+			  			echo $metric['name']."<br>";
+		  			};
+		  			*/
+		  		?>
+
 			  	<canvas id="insightsChart" width="800" height="400"></canvas>
 				
 			</div><!-- .box-inner -->
@@ -59,11 +70,12 @@
 	<div id="theDiv" class="modal-data">
 		<div class="bsmodal-title">Confirm Vehicle</div>
 		<div class="bsmodal-body">
-			<img src="/assets/img.jpg">
-			<form id="stockSubmit" method="POST" action="#">
-				<input type="text" name="brand" value="{{brand}}">
-				<input type="text" name="model" value="{{model}}">
-				<input type="text" name="price" value="{{price}}">
+			<img src="/assets/images/img.jpg">
+			<form id="stockSubmit" method="POST" action="/api/php/adpush/facebook/user/StockSubmit">
+				<input type="hidden" name="img" value="/assets/images/img.jpg">
+				<textarea name="message">
+					{{brand}}, {{model}}, {{price}}
+				</textarea>
 				<button>Submit</button>
 			</form>
 		</div>

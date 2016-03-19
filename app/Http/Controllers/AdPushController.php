@@ -20,10 +20,12 @@ class AdPushController extends Controller{
     private $appID = null;
     private $appSecret = null;
 
+    private $page = "201102313595004";
+
     public function __construct(){
       session_start();
 
-      $test = true;
+      $test = false;
 
       if($test){
         //adpush - Test 1
@@ -58,7 +60,7 @@ class AdPushController extends Controller{
         if (!$_SESSION['facebook_access_token']) {
           $helper = $this->fb->getRedirectLoginHelper();
           try {
-            $_SESSION['facebook_access_token'] = (string) $helper->getAccessToken('http://adpush.dev/feed/');
+            $_SESSION['facebook_access_token'] = (string) $helper->getAccessToken('http://adpush.binsym.com/');
           } catch(FacebookResponseException $e) {
             // When Graph returns an error
             return 'Graph returned an error: ' . $e->getMessage();
@@ -73,8 +75,8 @@ class AdPushController extends Controller{
         if ($_SESSION['facebook_access_token']) {
           $fblogin = "<p class='middle'>You are logged in!</p>";
         } else {
-          $permissions = ['publish_actions', 'manage_pages', 'status_update', 'pages_manage_cta', 'read_insights'];
-          $loginUrl = $helper->getLoginUrl('http://adpush.dev/feed/', $permissions);
+          $permissions = ['publish_pages', 'manage_pages', 'read_insights'];
+          $loginUrl = $helper->getLoginUrl('http://adpush.binsym.com/', $permissions);
 
           $fblogin = '<a class="middle" href="' . $loginUrl . '">Log in with Facebook</a>';
         }
@@ -82,29 +84,76 @@ class AdPushController extends Controller{
         return view('home', ["fblogin" => $fblogin]);
     }
 
-    public function getFeed(){
+    public function permissions(){
+      //data for feed
 
-      $return = $this->fb->get('/233563893656195/feed', $_SESSION['facebook_access_token']);
+      $return = $this->fb->get('/me/permissions', $_SESSION['facebook_access_token']);
 
       return $return->getDecodedBody();
       // return $_SESSION['facebook_access_token'];
     }
 
-    public function submitStock(/*Request $request*/){
+    public function revokePermission(){
+      //data for feed
 
-      $this->fb->post('/233563893656195/feed', ['message' => 'hello'], $_SESSION['facebook_access_token']);
+      $this->fb->delete('/me/permissions', 'publish_actions', $_SESSION['facebook_access_token']);
+
+      return 'deleted';
+      // return $_SESSION['facebook_access_token'];
+    }
+
+    public function getFeed(){
+      //data for feed
+
+      $return = $this->fb->get('/'.$this->page.'/feed', $_SESSION['facebook_access_token']);
+
+      return $return->getDecodedBody();
+      // return $_SESSION['facebook_access_token'];
+    }
+
+    public function feed(){
+      //page view for feed
+
+      $return = $this->fb->get('/'.$this->page.'/feed', $_SESSION['facebook_access_token']);
 
 
-      return "posted";
+      return view('feed', ["data" => $return->getDecodedBody()]);
+    }
+
+    public function submitStock(Request $request){
+
+
+      $link = "http://adpush.binsym.com".$request->input('img');
+      $message = $request->input('message');
+
+      $this->fb->post('/'.$this->page.'/feed', 
+        ['message' => $message], 
+        $_SESSION['facebook_access_token']);
+
+
+      return redirect('http://adpush.binsym.com/stock');
+
+    }
+
+    public function stock(){
+
+      //get last feed post to show insights for
+      $postID = $this->fb->get('/'.$this->page.'/feed', $_SESSION['facebook_access_token'])->getDecodedBody()['data'][0]['id'];
+
+
+      //get feed data to return
+      $insight = $this->fb->get('/'.$postID.'/insights', $_SESSION['facebook_access_token'])->getDecodedBody();
+
+      return view('stock', ["data" => $insight]);
 
     }
 
     public function token(){
-      return $_SESSION['facebook_access_token'];
+      return $this->page."<br><br>".$_SESSION['facebook_access_token'];
     }
 
     public function insights(){
-      return $this->fb->get('/233563893656195/', $_SESSION['facebook_access_token'])->getDecodedBody();
+      return $this->fb->get('/'.$this->page.'/insights', $_SESSION['facebook_access_token'])->getDecodedBody();
     }
 
 

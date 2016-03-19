@@ -4,10 +4,17 @@ class bsModal {
 		//ids = array
 		//options = object
 
-		
-		this.options = options;
+		if(typeof options !== 'undefined'){
+			this.options = options;
+		} else {
+			this.options = {
+				type: null,
+				dev: false
+			}
+		}	
 
-		if(options.dev){
+
+		if(typeof this.options.dev !== 'undefined'){
 			this.dev = true;
 		}else {
 			this.dev = false;
@@ -64,7 +71,7 @@ class bsModal {
 				content = this.open_url(options.url);
 				break;
 			case "div":
-				content = this.open_div(options.id);
+				content = this.open_div(id);
 				break;
 			case "inline": 
 				content = this.open_inline(id);

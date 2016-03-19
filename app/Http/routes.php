@@ -13,11 +13,10 @@
 
 $app->get('/', 'AdPushController@facebookConnect');
 
-$app->get('/stock', function (){
-    return view('stock');
-});
 
-$app->get('/feed', 'AdPushController@facebookConnect');
+$app->get('/stock', 'AdPushController@stock');
+
+$app->get('/feed', 'AdPushController@feed');
 
 $app->get('/api/php/', function (){
     return "Please define the api you would like to access.";
@@ -37,6 +36,10 @@ $app->group(['prefix' => 'api/php/adpush/facebook/{user}'], function () use ($ap
 	//TODO: add middleware to authorise users
 
 	$app->get('token', 'App\Http\Controllers\AdPushController@token');
+	
+	$app->get('permissions', 'App\Http\Controllers\AdPushController@permissions');
+
+	$app->get('revokePermission', 'App\Http\Controllers\AdPushController@revokePermission');
 
 	$app->get('insights', 'App\Http\Controllers\AdPushController@insights');
 
@@ -44,6 +47,8 @@ $app->group(['prefix' => 'api/php/adpush/facebook/{user}'], function () use ($ap
 
 	$app->get('getFeed', 'App\Http\Controllers\AdPushController@getFeed');
 
-	$app->get('StockSubmit', 'App\Http\Controllers\AdPushController@submitStock');
+	//$app->get('StockSubmit', 'App\Http\Controllers\AdPushController@submitStock');
+	
+	$app->Post('StockSubmit', 'App\Http\Controllers\AdPushController@submitStock');
 
 });

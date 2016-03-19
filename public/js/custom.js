@@ -17,16 +17,18 @@
 			});
 
 			//submit stock to eBay page
-			var stockForm = document.getElementById('bsmodal-theForm');
-			var stockReturn = null;
-			stockForm.addEventListener("submit", function(e){
-				e.preventDefault();
-				stockReturn = new StockSubmit(new FormData(e.target));
-				return false;
-			});
+			// var stockForm = document.getElementById('bsmodal-theForm');
+			// var stockReturn = null;
+			// stockForm.addEventListener("submit", function(e){
+			// 	e.preventDefault();
+			// 	stockReturn = new StockSubmit(new FormData(e.target));
+			// 	return false;
+			// });
 
 			return false;
 	});
+
+
 
 
 //chart settings
@@ -34,7 +36,7 @@
 Chart.defaults.global.responsive = true;
 
 var data = {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    labels: ["00:00", "03:00", "06:00", "09:00", "12:00", "15:00", "18:00", "21:00"],
     datasets: [
         {
             label: "My First dataset",
@@ -44,7 +46,7 @@ var data = {
             pointStrokeColor: "#fff",
             pointHighlightFill: "#fff",
             pointHighlightStroke: "rgba(220,220,220,1)",
-            data: [65, 59, 80, 81, 56, 55, 40]
+            data: [0, 8, 12, 30, 31, 32, 10, 0]
         },
         {
             label: "My Second dataset",
@@ -54,7 +56,7 @@ var data = {
             pointStrokeColor: "#fff",
             pointHighlightFill: "#fff",
             pointHighlightStroke: "rgba(151,187,205,1)",
-            data: [28, 48, 40, 19, 86, 27, 90]
+            data: [2, 40, 30, 19, 66, 27, 70, 10]
         }
     ]
 };
